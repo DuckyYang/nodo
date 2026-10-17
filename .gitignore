@@ -45,3 +45,7 @@ Desktop.ini
 
 # typecheck
 *.tsbuildinfo
+
+.trae/
+
+.vscode/
