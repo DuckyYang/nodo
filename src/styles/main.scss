@@ -1,0 +1,126 @@
+* { box-sizing: border-box; }
+
+html, body, #app { margin: 0; padding: 0; height: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--el-bg-color);
+  color: var(--el-text-color-primary);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ 全局设计变量（白天/黑夜自动切换） ============ */
+:root {
+  --nodo-bg-page: #f5f7fa;
+  --nodo-bg-glass: rgba(255, 255, 255, 0.82);
+  --nodo-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --nodo-shadow-pop: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --nodo-radius: 10px;
+  --nodo-topbar-h: 56px;
+}
+html.dark {
+  --nodo-bg-page: #141414;
+  --nodo-bg-glass: rgba(20, 20, 20, 0.82);
+  --nodo-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.5);
+  --nodo-shadow-pop: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* ============ 滚动条 ============ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb {
+  background: var(--el-border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--el-border-color-dark); }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ============ 顶栏 ============ */
+.nodo-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: var(--nodo-topbar-h);
+  padding: 0 20px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+  background: var(--nodo-bg-glass);
+  backdrop-filter: blur(12px);
+  flex: 0 0 auto;
+  z-index: 10;
+}
+
+.nodo-logo { display: flex; align-items: center; gap: 10px; user-select: none; }
+.nodo-logo img { height: 30px; display: block; }
+
+.nodo-menu { display: flex; gap: 4px; flex: 1; margin-left: 16px; }
+
+.nodo-actions { display: flex; align-items: center; gap: 0; }
+
+.nodo-content {
+  flex: 1 1 auto; min-height: 0; overflow: hidden;
+  display: flex;
+  background: var(--nodo-bg-page);
+}
+
+.nodo-page {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+}
+
+/* ============ 页面容器 ============ */
+.page-pad { padding: 20px; }
+
+/* ============ 卡片 ============ */
+.nodo-card {
+  background: var(--el-bg-color);
+  border-radius: var(--nodo-radius);
+  box-shadow: var(--nodo-shadow-card);
+}
+
+/* ============ 通用按钮 ============ */
+.nodo-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--el-text-color-primary);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.nodo-icon-btn:hover { background: var(--el-fill-color-light); }
+.nodo-icon-btn:active { transform: scale(0.94); }
+
+/* ============ 过渡动画 ============ */
+.fade-enter-active, .fade-leave-active { transition: opacity 0.2s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
+
+/* ============ 全局消息提示：右上角圆角气泡 ============ */
+/* Element Plus 2.9+ 用 placement 决定水平位置（默认 top = 居中 + is-center 类），
+   .el-message.is-center { left:50%; transform:translate(-50%) } 优先级更高，
+   会压住普通的 .el-message 覆盖。因此这里同优先级覆盖 is-center 变体，
+   且 top 偏移由组件内联 style 管理（多条堆叠），不能动 */
+.el-message,
+.el-message.is-center {
+  left: auto;
+  right: 16px;
+  transform: none;
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--el-border-color-lighter);
+  box-shadow: var(--nodo-shadow-pop);
+  backdrop-filter: blur(8px);
+  background: var(--nodo-bg-glass);
+  font-size: 13px;
+  font-weight: 500;
+}
+.el-message .el-message__content { line-height: 1.5; }
+/* 默认过渡类带水平居中位移 translate(-50%,…)：右对齐后会导致滑入滑出
+   水平偏移，改为纯纵向轻弹（上滑淡入 / 上滑缩小淡出） */
+.el-message-fade-enter-from,
+.el-message-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-14px) scale(0.95) !important;
+}

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": false,
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["electron/server/_shared/*"],
+      "@main/*": ["electron/*"]
+    },
+    "types": ["node"]
+  },
+  "include": [
+    "electron/**/*.ts",
+    "electron/**/*.d.ts",
+    "electron.vite.config.ts",
+    "src/env.d.ts"
+  ]
+}
