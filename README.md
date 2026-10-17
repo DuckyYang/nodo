@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/nodo-logo.png" alt="记了么 Nodo" width="380">
+<img src="docs/nodo-logo-1.png" alt="记了么 Nodo" width="380">
 
 # 记了么 · Nodo
 
